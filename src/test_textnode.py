@@ -3,19 +3,19 @@ from textnode import TextNode, TextType
 
 
 class TestTextNode(unittest.TestCase):
-    # two nodes with the same text, type, and url should be equal
+    #two nodes with the same text, type, and url should be equal
     def test_eq(self):
         node = TextNode("This is a text node", TextType.BOLD)
         node2 = TextNode("This is a text node", TextType.BOLD)
         self.assertEqual(node, node2)
 
-    # ommiting url should default to None, and two nodes should be equal
+    #ommiting url should default to None, and two nodes should be equal
     def test_eq_url_none(self):
         node = TextNode("This is a text node", TextType.TEXT, None)
         node2 = TextNode("This is a text node", TextType.TEXT)
         self.assertEqual(node, node2)
 
-    # two nodes with the same text and type but different urls should not be equal
+    #two nodes with the same text and type but different urls should not be equal
     def test_eq_with_url(self):
         node = TextNode("Click here", TextType.LINK, "https://www.boot.dev")
         node2 = TextNode("Click here", TextType.LINK, "https://www.boot.dev")
