@@ -66,5 +66,30 @@ Second block"""
         self.assertEqual(markdown_to_blocks("\n\n\n   \n\n"), [])
 
 
+    # A code block with a blank line inside stays ONE block
+    def test_code_block_with_blank_line(self):
+        md = """Intro
+
+```
+def f():
+    x = 1
+
+    return x
+```
+
+Outro"""
+        self.assertEqual(
+            markdown_to_blocks(md),
+            [
+                "Intro",
+                "```\ndef f():\n    x = 1\n\n    return x\n```",
+                "Outro",
+            ],
+        )
+
+    # A "blank" line that only has spaces still separates blocks
+    def test_whitespace_only_separator(self):
+        self.assertEqual(markdown_to_blocks("a\n   \nb"), ["a", "b"])
+
 if __name__ == "__main__":
     unittest.main()
